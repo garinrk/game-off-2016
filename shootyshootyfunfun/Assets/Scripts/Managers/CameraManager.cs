@@ -5,10 +5,7 @@ public class CameraManager : MonoBehaviour
 {
 
     public static CameraManager instance = null;
-
-    /// <summary>
-    /// SHAKE EFFECT SHIT
-    /// </summary>
+    #region ShakeEffectVariables
 
     // Transform of the camera to shake. Grabs the gameObject's transform
     // if null.
@@ -25,9 +22,7 @@ public class CameraManager : MonoBehaviour
 
     Vector3 originalPos;
 
-    /// <summary>
-    /// END SHAKE EFFECT SHIT
-    /// </summary>
+    #endregion
 
     void Awake()
     {
@@ -41,12 +36,14 @@ public class CameraManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
-
         if (camTransform == null)
         {
             camTransform = GetComponent(typeof(Transform)) as Transform;
         }
+
+        DontDestroyOnLoad(gameObject);
+
+
     }
 
     void OnEnable()
@@ -67,9 +64,7 @@ public class CameraManager : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// MORE SHAKE EFFECT SHIT
-    /// </summary>
+    #region ShakeEffectFunctions
 
     void ShakeUpdate()
     {
@@ -107,9 +102,7 @@ public class CameraManager : MonoBehaviour
         currentShakeFactor = startingShakeFactor;
     }
 
-    /// <summary>
-    /// END MORE SHAKE EFFECT SHIT
-    /// </summary>
+    #endregion  
 
 
 }

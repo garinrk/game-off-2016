@@ -2,11 +2,6 @@
 using System.Collections;
 using System;
 
-enum GameState
-{
-    PLAYING,
-    STOPPED
-}
 
 public class Manager : MonoBehaviour {
 
@@ -15,12 +10,11 @@ public class Manager : MonoBehaviour {
 
     public Vector3 gameGravity = new Vector3(0, -1.0f, 0);
     
-    public GameObject MainCanvasObject;
-    
+    //managers    
     private CameraManager cmra_mgr;
+
     [SerializeField]
-    private int currentRound = 1;
-    
+    private int currentRound = 0;
     private void Awake()
     {
 
@@ -49,7 +43,7 @@ public class Manager : MonoBehaviour {
 
         if (Input.GetKeyUp("s"))
         {
-            StartRound();
+            SendStartRound();
         }
 
         if (Input.GetKeyUp("space"))
@@ -59,10 +53,13 @@ public class Manager : MonoBehaviour {
 
     }
 
-    private void StartRound()
+    private void SendStartRound()
     {
-        UIManager.instance.StartNewRound();
+        //wow that's ugly as fuck, sorry fam
+        if (UIManager.instance.timer.isCountingToRoundStart || UIManager.instance.timer.isCountingToStartRemoval)
+            return;
         currentRound++;
+        UIManager.instance.StartNewRound(currentRound);
     }
 
     private void SendShake()

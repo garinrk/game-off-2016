@@ -1,32 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class RoundTimer : MonoBehaviour {
+    
+    public float MasterCountdownTimer = 5.0f;
+    private float countdownTime;
+
+    public float masterHideStartTime = 2.0f;
+    private float hideStartTime;
 
     [HideInInspector]
-    public float countdownTime = 5.0f;
-    [HideInInspector]
-    public float roundTime = 666.0f;
+    public float masterRoundTime = 666.0f;
+    private float currentElapsedRoundTime = 0.0f;
+
+    private Text countdownTextOnScreen;
 
     [HideInInspector]
-    public float currentElapsedRoundTime = 0.0f;
-
-    private float hideStartTime = 2.0f;
-
-    private Text textOnScreen;
-
-    private bool countingDown = false;
-    private bool removeStartTimer = false;
+    public bool isCountingToRoundStart = false;
+    [HideInInspector]
+    public bool isCountingToStartRemoval = false;
 
 
     void Awake()
     {
 
-        if(textOnScreen == null)
+        if(countdownTextOnScreen == null)
         {
-            textOnScreen = GetComponent(typeof(Text)) as Text;
+            countdownTextOnScreen = GetComponent(typeof(Text)) as Text;
         }
+    
+        //initial countdown states
+        countdownTime = MasterCountdownTimer;
+        hideStartTime = masterHideStartTime;
 
     }
 
@@ -39,37 +46,51 @@ public class RoundTimer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (countingDown)
-        {
-            countdownTime -= Time.deltaTime;
-            textOnScreen.text = countdownTime.ToString();
-        }
-        if(countingDown && countdownTime <= 0)
-        {
-            countingDown = !countingDown;
-            textOnScreen.text = "START";
+        CountdownUpdate();
 
-            removeStartTimer = true;
-        }
-
-        if (removeStartTimer)
-        {
-            hideStartTime -= Time.deltaTime;
-        }
-
-        if(removeStartTimer && hideStartTime <= 0)
-        {
-            removeStartTimer = !removeStartTimer;
-            textOnScreen.text = "";
-        }
-        //Debug.Log(countdownTime.ToString());
-	
+        StartRemovalCountdownUpdate();
         
 	}
 
     public void StartNewRound()
     {
-        countingDown = true;
+        isCountingToRoundStart = true;
+        countdownTime = MasterCountdownTimer;
         currentElapsedRoundTime = 0.0f;
     }
+
+    #region CountdownFunctions
+
+    private void StartRemovalCountdownUpdate()
+    {
+        if (isCountingToStartRemoval)
+        {
+            hideStartTime -= Time.deltaTime;
+        }
+
+        if (isCountingToStartRemoval && hideStartTime <= 0)
+        {
+            isCountingToStartRemoval = !isCountingToStartRemoval;
+            countdownTextOnScreen.text = "";
+            hideStartTime = masterHideStartTime;
+        }
+    }
+
+    void CountdownUpdate()
+    {
+        if (isCountingToRoundStart)
+        {
+            countdownTime -= Time.deltaTime;
+            countdownTextOnScreen.text = countdownTime.ToString();
+        }
+        if (isCountingToRoundStart && countdownTime <= 0)
+        {
+            isCountingToRoundStart = !isCountingToRoundStart;
+            countdownTextOnScreen.text = "START";
+
+            isCountingToStartRemoval = true;
+        }
+    }
+
+    #endregion
 }

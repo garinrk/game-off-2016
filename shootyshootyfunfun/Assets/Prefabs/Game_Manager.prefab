@@ -39,11 +39,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameGravity: {x: 0, y: -1, z: 0}
-  masterRoundTime: 30
-  masterCountdownTime: 5
-  RoundTimerObject: {fileID: 0}
-  CameraObject: {fileID: 0}
-  currentRound: 1
+  MainCanvasObject: {fileID: 0}
+  currentRound: 0
 --- !u!224 &224000014116717474
 RectTransform:
   m_ObjectHideFlags: 1

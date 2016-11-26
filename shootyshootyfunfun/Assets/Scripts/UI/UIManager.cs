@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class UIManager : MonoBehaviour {
 
+    //gameobject references to get around finds
     public GameObject roundTimerObject;
     public GameObject mainCameraObject;
-
+    public GameObject roundTextObject;
+    
     public float masterRoundTime;
     public float masterCountdownTime;
 
-    private RoundTimer rt;
+    [HideInInspector]
+    public RoundTimer timer;
+    private Text roundText;
 
     public static UIManager instance = null;
 
@@ -25,9 +30,13 @@ public class UIManager : MonoBehaviour {
         }
 
         DontDestroyOnLoad(gameObject);
-        rt = roundTimerObject.GetComponent<RoundTimer>();
-        rt.roundTime = masterRoundTime;
-        rt.countdownTime = masterCountdownTime;
+
+        //initialization
+        timer = roundTimerObject.GetComponent<RoundTimer>();
+        roundText = roundTextObject.GetComponent<Text>();
+        timer.masterRoundTime = masterRoundTime;
+        timer.MasterCountdownTimer = masterCountdownTime;
+
     }
 
     // Use this for initialization
@@ -40,10 +49,13 @@ public class UIManager : MonoBehaviour {
 	
 	}
 
-    public void StartNewRound()
+    public void StartNewRound(int new_round)
     {
-        rt.StartNewRound();
+        roundText.text = "Round " + new_round.ToString();
+        timer.StartNewRound();
     }
+
+    
 
 
 }
