@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/garin_scene.unity
+- path: Assets/Scenes/jp_scene.unity
   isLoaded: 1
   isActive: 1
