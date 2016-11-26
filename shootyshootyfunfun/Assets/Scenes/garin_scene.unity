@@ -197,6 +197,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013874165878, guid: 9259a4ba8eda57944bd7bd3e431dcbba,
+        type: 2}
+      propertyPath: mainCameraObject
+      value: 
+      objectReference: {fileID: 677728196}
     - target: {fileID: 223000011425896512, guid: 9259a4ba8eda57944bd7bd3e431dcbba,
         type: 2}
       propertyPath: m_Camera
@@ -205,9 +210,14 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9259a4ba8eda57944bd7bd3e431dcbba, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &712033447 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012138197072, guid: 9259a4ba8eda57944bd7bd3e431dcbba,
+    type: 2}
+  m_PrefabInternal: {fileID: 712033445}
 --- !u!1 &846740735 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1000011488258866, guid: 9259a4ba8eda57944bd7bd3e431dcbba,
+  m_PrefabParentObject: {fileID: 1000012026517046, guid: 9259a4ba8eda57944bd7bd3e431dcbba,
     type: 2}
   m_PrefabInternal: {fileID: 712033445}
 --- !u!1 &1284960027
@@ -310,6 +320,21 @@ Prefab:
     - target: {fileID: 4000013270815572, guid: c55b437bf6a27c94f8f05b4849dca1ba, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013221724164, guid: c55b437bf6a27c94f8f05b4849dca1ba,
+        type: 2}
+      propertyPath: startingShakeFactor
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013221724164, guid: c55b437bf6a27c94f8f05b4849dca1ba,
+        type: 2}
+      propertyPath: shakeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013221724164, guid: c55b437bf6a27c94f8f05b4849dca1ba,
+        type: 2}
+      propertyPath: shakeFactorDelta
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c55b437bf6a27c94f8f05b4849dca1ba, type: 2}
@@ -421,6 +446,11 @@ Prefab:
       propertyPath: CameraObject
       value: 
       objectReference: {fileID: 677728196}
+    - target: {fileID: 114000010026022078, guid: 5bee757de480e89449a2542d8830ddc1,
+        type: 2}
+      propertyPath: MainCanvasObject
+      value: 
+      objectReference: {fileID: 712033447}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5bee757de480e89449a2542d8830ddc1, type: 2}
   m_IsPrefabParent: 0

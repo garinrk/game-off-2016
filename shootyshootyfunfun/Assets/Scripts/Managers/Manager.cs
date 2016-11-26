@@ -2,28 +2,41 @@
 using System.Collections;
 using System;
 
+enum GameState
+{
+    PLAYING,
+    STOPPED
+}
+
 public class Manager : MonoBehaviour {
-    
+
+
+    public static Manager instance = null;
+
     public Vector3 gameGravity = new Vector3(0, -1.0f, 0);
-
-    public float masterRoundTime = 30.0f;
-    public float masterCountdownTime = 5.0f;
-
-    public GameObject RoundTimerObject;
-    public GameObject CameraObject;
-    private RoundTimer rt;
-    private ShakeEffect se;
-
+    
+    public GameObject MainCanvasObject;
+    
+    private CameraManager cmra_mgr;
     [SerializeField]
     private int currentRound = 1;
     
     private void Awake()
     {
-        rt = RoundTimerObject.GetComponent<RoundTimer>();
-        se = CameraObject.GetComponent<ShakeEffect>();
+
+        //singleton shit
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+        
         Physics.gravity = gameGravity;
-        rt.roundTime = masterRoundTime;
-        rt.countdownTime = masterCountdownTime;
     }
     // Use this for initialization
     void Start () {
@@ -48,12 +61,14 @@ public class Manager : MonoBehaviour {
 
     private void StartRound()
     {
-        rt.StartNewRound();
+        UIManager.instance.StartNewRound();
         currentRound++;
     }
 
     private void SendShake()
     {
-        se.ShakeCamera();
+
+        CameraManager.instance.ShakeCamera();
+
     }
 }

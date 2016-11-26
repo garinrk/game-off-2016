@@ -9,6 +9,9 @@ public class RoundTimer : MonoBehaviour {
     [HideInInspector]
     public float roundTime = 666.0f;
 
+    [HideInInspector]
+    public float currentElapsedRoundTime = 0.0f;
+
     private float hideStartTime = 2.0f;
 
     private Text textOnScreen;
@@ -61,10 +64,12 @@ public class RoundTimer : MonoBehaviour {
         }
         //Debug.Log(countdownTime.ToString());
 	
+        
 	}
 
     public void StartNewRound()
     {
         countingDown = true;
+        currentElapsedRoundTime = 0.0f;
     }
 }
