@@ -13,7 +13,7 @@ public class Manager : MonoBehaviour {
 
 
     [SerializeField]
-    private int currentRound = 0;
+    public int currentRound = 0;
     private void Awake()
     {
 
@@ -32,23 +32,14 @@ public class Manager : MonoBehaviour {
         Physics.gravity = gameGravity;
     }
     // Use this for initialization
-    void Start () {
-	
+    void Start () {	
+		SendStartRound ();
         
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyUp("s"))
-        {
-            SendStartRound();
-        }
-
-        if (Input.GetKeyUp("space"))
-        {
-            SendShake();
-        }
 
     }
 
@@ -67,4 +58,14 @@ public class Manager : MonoBehaviour {
         CameraManager.instance.ShakeCamera();
 
     }
+
+	public void SendSpawnEnemies(){
+
+		//jp put your shit here to start the first round of enemies
+		//this function is called when a round begins formally. 
+		//so keep track of what wave you are on via currentRound 
+		//and spawn the appropriate enemy logic here.
+
+		Debug.Log ("Spawning shit");
+	}
 }

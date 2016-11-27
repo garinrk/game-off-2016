@@ -4,15 +4,16 @@ using UnityEngine.UI;
 using System;
 
 public class RoundTimer : MonoBehaviour {
-    
-    public float MasterCountdownTimer = 5.0f;
+    [HideInInspector]
+	public float masterCountdownTimer = 5.0f;
     private float countdownTime;
 
+	[HideInInspector]
     public float masterHideStartTime = 2.0f;
     private float hideStartTime;
 
     [HideInInspector]
-    public float masterRoundTime = 666.0f;
+	public float masterRoundTime = 666.0f;
     private float currentElapsedRoundTime = 0.0f;
 
     private Text countdownTextOnScreen;
@@ -21,6 +22,8 @@ public class RoundTimer : MonoBehaviour {
     public bool isCountingToRoundStart = false;
     [HideInInspector]
     public bool isCountingToStartRemoval = false;
+
+	private bool inRound = false;
 
 
     void Awake()
@@ -32,7 +35,7 @@ public class RoundTimer : MonoBehaviour {
         }
     
         //initial countdown states
-        countdownTime = MasterCountdownTimer;
+        countdownTime = masterCountdownTimer;
         hideStartTime = masterHideStartTime;
 
     }
@@ -46,18 +49,40 @@ public class RoundTimer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        CountdownUpdate();
-
-        StartRemovalCountdownUpdate();
         
+	}
+
+	void FixedUpdate(){
+
+		RoundTimeUpdate ();
+		CountdownUpdate();
+		StartRemovalCountdownUpdate();
 	}
 
     public void StartNewRound()
     {
         isCountingToRoundStart = true;
-        countdownTime = MasterCountdownTimer;
-        currentElapsedRoundTime = 0.0f;
+        countdownTime = masterCountdownTimer;
+
     }
+
+	void RoundTimeUpdate(){
+		if (inRound) {
+			
+			if (currentElapsedRoundTime >= masterRoundTime) {
+				inRound = false;
+				currentElapsedRoundTime = 0.0f;
+				countdownTextOnScreen.text = "Round " + Manager.instance.currentRound + " OVER!";
+				return;
+			} else {
+				currentElapsedRoundTime += Time.deltaTime;
+				countdownTextOnScreen.text = "Time Left: " + (masterRoundTime - currentElapsedRoundTime).ToString ();
+			}
+		} else {
+
+		}
+			
+	}
 
     #region CountdownFunctions
 
@@ -73,6 +98,8 @@ public class RoundTimer : MonoBehaviour {
             isCountingToStartRemoval = !isCountingToStartRemoval;
             countdownTextOnScreen.text = "";
             hideStartTime = masterHideStartTime;
+			inRound = true;
+			SendSpawnEnemies ();
         }
     }
 
@@ -91,6 +118,10 @@ public class RoundTimer : MonoBehaviour {
             isCountingToStartRemoval = true;
         }
     }
+
+	void SendSpawnEnemies(){
+		Manager.instance.SendSpawnEnemies ();
+	}
 
     #endregion
 }
