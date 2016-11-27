@@ -10,6 +10,18 @@ public class Manager : MonoBehaviour {
 
     public Vector3 gameGravity = new Vector3(0, -1.0f, 0);
     
+	[SerializeField]
+	EnemySpawner spawner1;
+	[SerializeField]
+	EnemySpawner spawner2;
+	[SerializeField]
+	EnemySpawner spawner3;
+	[SerializeField]
+	EnemySpawner spawner4;
+	[SerializeField]
+	EnemySpawner spawner5;
+	[SerializeField]
+	EnemySpawner spawner6;
 
 
     [SerializeField]
@@ -60,18 +72,22 @@ public class Manager : MonoBehaviour {
     }
 
 	public void SendSpawnEnemies(){
+		spawner1.enemyPrefab.enemType = EnemyType.Shooter;
+		Instantiate (spawner1.enemyPrefab,spawner1.transform.position,Quaternion.identity);
+	
+		spawner2.enemyPrefab.enemType = EnemyType.Shooter;
+		Instantiate (spawner2.enemyPrefab,spawner2.transform.position,Quaternion.identity);
 
-		//A static reference to an enemy
-		Enemy enemy = new Enemy();
+		spawner3.enemyPrefab.enemType = EnemyType.Vanilla;
+		Instantiate (spawner3.enemyPrefab,spawner3.transform.position,Quaternion.identity);
 
-		//jp put your shit here to start the first round of enemies
-		//this function is called when a round begins formally. 
-		//so keep track of what wave you are on via currentRound 
-		//and spawn the appropriate enemy logic here.
+		spawner4.enemyPrefab.enemType = EnemyType.Vanilla;
+		Instantiate (spawner4.enemyPrefab,spawner4.transform.position,Quaternion.identity);
 
-		enemy = enemy.SpawnEnemyShooter ();
+		spawner5.enemyPrefab.enemType = EnemyType.Shooter;
+		Instantiate (spawner5.enemyPrefab,spawner5.transform.position,Quaternion.identity);
 
-
-		Debug.Log ("Spawning shit");
+		spawner6.enemyPrefab.enemType = EnemyType.Shooter;
+		Instantiate (spawner6.enemyPrefab,spawner6.transform.position,Quaternion.identity);
 	}
 }

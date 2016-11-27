@@ -11,9 +11,9 @@ public class MoveDamnit : MonoBehaviour {
 	Vector3 lookDirection = Vector3.zero;
 	public Animator playerAnimator;
 	public Animation playerAnimation;
-	float downTime;
 	public float maxDownTime =1;
 	bool jump;
+	bool grounded = true;
 
 	bool isMoving;
 	Rigidbody rb;
@@ -32,7 +32,6 @@ public class MoveDamnit : MonoBehaviour {
 		playerAnimator = GetComponent<Animator> ();
 		playerAnimation = GetComponent<Animation> ();
 		isMoving = false;
-		downTime = 0.0f;
 		jump = true;
 	}
 	
@@ -42,21 +41,12 @@ public class MoveDamnit : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if (Input.GetKey ("w") && jump) {
-			rb.MovePosition (rb.position + up * Time.deltaTime);
-			//downTime += playerSpeedVertical;
-			//if (downTime > maxDownTime) {
-				//jump = false;
-			//}
-		} else {
-			//jump = false;
-			//rb.MovePosition (rb.position + -up * Time.deltaTime*downScale);
-			//if (downTime >= 0) {
-			//	downTime -= playerSpeedVertical*downScale;
-			//}else{
-			//	downTime = 0f;
-			//	jump = true;
-			//}
+		if (Input.GetKey("w")) {
+
+
+				rb.MovePosition (rb.position + up * Time.deltaTime);
+
+
 		}
 		if(Input.GetKey("a")){			
 			playerAnimator.Play ("Move");
@@ -71,6 +61,12 @@ public class MoveDamnit : MonoBehaviour {
 		}
 		if(!isMoving){			
 			playerAnimator.Play ("Idle");
+		}
+	}
+
+	void OnCollisionEnter(Collision collision){
+		if (collision.transform.tag == "Platform") {		
+			//rb.MovePosition (rb.position - up * Time.deltaTime*2);
 		}
 	}
 }

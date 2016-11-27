@@ -16,9 +16,12 @@ public class ShootDamnit : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider){
+
 		print (collider.gameObject.tag);
-		if(collider.CompareTag("Wall")){
-			Destroy(this);
+
+		if (collider.gameObject.tag != "Player" && collider.gameObject.tag != "Switch") {
+			Destroy (gameObject);
 		}
 	}
 }
+ 
