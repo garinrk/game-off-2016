@@ -11,9 +11,15 @@ public class MoveDamnit : MonoBehaviour {
 	Vector3 lookDirection = Vector3.zero;
 	public Animator playerAnimator;
 	public Animation playerAnimation;
+	float downTime;
+	public float maxDownTime =1;
+	bool jump;
 
 	bool isMoving;
 	Rigidbody rb;
+
+	[SerializeField]
+	float downScale;
 
 	void Awake(){
 		rb = GetComponent<Rigidbody> ();
@@ -26,6 +32,8 @@ public class MoveDamnit : MonoBehaviour {
 		playerAnimator = GetComponent<Animator> ();
 		playerAnimation = GetComponent<Animation> ();
 		isMoving = false;
+		downTime = 0.0f;
+		jump = true;
 	}
 	
 	// Update is called once per frame
@@ -34,8 +42,21 @@ public class MoveDamnit : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if (Input.GetKey ("w")) {
+		if (Input.GetKey ("w") && jump) {
 			rb.MovePosition (rb.position + up * Time.deltaTime);
+			//downTime += playerSpeedVertical;
+			//if (downTime > maxDownTime) {
+				//jump = false;
+			//}
+		} else {
+			//jump = false;
+			//rb.MovePosition (rb.position + -up * Time.deltaTime*downScale);
+			//if (downTime >= 0) {
+			//	downTime -= playerSpeedVertical*downScale;
+			//}else{
+			//	downTime = 0f;
+			//	jump = true;
+			//}
 		}
 		if(Input.GetKey("a")){			
 			playerAnimator.Play ("Move");

@@ -14,4 +14,11 @@ public class ShootDamnit : MonoBehaviour {
 	void Update () {
 		transform.Translate (direction * bulletSpeed*Time.deltaTime);
 	}
+
+	void OnTriggerEnter(Collider collider){
+		print (collider.gameObject.tag);
+		if(collider.CompareTag("Wall")){
+			Destroy(this);
+		}
+	}
 }

@@ -61,10 +61,16 @@ public class Manager : MonoBehaviour {
 
 	public void SendSpawnEnemies(){
 
+		//A static reference to an enemy
+		Enemy enemy = new Enemy();
+
 		//jp put your shit here to start the first round of enemies
 		//this function is called when a round begins formally. 
 		//so keep track of what wave you are on via currentRound 
 		//and spawn the appropriate enemy logic here.
+
+		enemy = enemy.SpawnEnemyShooter ();
+
 
 		Debug.Log ("Spawning shit");
 	}
