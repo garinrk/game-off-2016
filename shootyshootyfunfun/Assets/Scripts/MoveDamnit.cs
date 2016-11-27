@@ -25,13 +25,13 @@ public class MoveDamnit : MonoBehaviour {
 
 	void FixedUpdate(){
 		if(Input.GetKeyDown("w")){
-			transform.Translate(up);
+			transform.Translate(up*Time.deltaTime);
 		}
 		if(Input.GetKey("a")){
-			transform.Translate(left);
+			transform.Translate(left*Time.deltaTime);
 		}
 		if(Input.GetKey("d")){
-			transform.Translate(right);
+			transform.Translate(right*Time.deltaTime);
 		}
 		if(Input.GetButtonDown("Fire1")){
 			ShootyShooot ();
