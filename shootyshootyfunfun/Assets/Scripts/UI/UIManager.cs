@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour {
     
     public float masterRoundTime;
     public float masterCountdownTime;
+	public float masterHideStartTime;
 
     [HideInInspector]
     public RoundTimer timer;
@@ -34,8 +35,11 @@ public class UIManager : MonoBehaviour {
         //initialization
         timer = roundTimerObject.GetComponent<RoundTimer>();
         roundText = roundTextObject.GetComponent<Text>();
+
+
         timer.masterRoundTime = masterRoundTime;
-        timer.MasterCountdownTimer = masterCountdownTime;
+		timer.masterCountdownTimer = masterCountdownTime;
+		timer.masterHideStartTime = masterHideStartTime;
 
     }
 

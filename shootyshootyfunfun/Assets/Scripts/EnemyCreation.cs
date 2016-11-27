@@ -205,15 +205,19 @@ public class EnemyCreation : MonoBehaviour {
 		} 
 
 
-		if (collision.transform.tag == "Bullet") {
-			Destroy (gameObject);
-
-		}
 
 
 	}
 
+	void OnTriggerEnter(Collider collider)
+	{
 
+		if (collider.transform.tag == "Bullet") {
+			Destroy (gameObject);
+
+		}
+
+	}
 
 
 
