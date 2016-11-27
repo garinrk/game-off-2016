@@ -83,17 +83,33 @@ public class CameraManager : MonoBehaviour
 
     public void ShakeCamera()
     {
-        if (shakeLeft > 0)
+
+        ShakeCamera(startingShakeFactor, shakeDuration);
+        //if (shakeLeft > 0)
+        //{
+        //    currentShakeFactor += shakeFactorDelta;
+        //    return;
+        //}
+        //else
+        //{
+        //    currentShakeFactor = startingShakeFactor;
+        //    shakeLeft = shakeDuration;
+        //}
+
+    }
+
+    public void ShakeCamera(float newStartingShakeFactor, float duration)
+    {
+        if(shakeLeft > 0)
         {
             currentShakeFactor += shakeFactorDelta;
             return;
         }
         else
         {
-            currentShakeFactor = startingShakeFactor;
-            shakeLeft = shakeDuration;
+            currentShakeFactor = newStartingShakeFactor;
+            shakeLeft = duration;
         }
-
     }
 
     void ShakeEnable()

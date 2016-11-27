@@ -180,7 +180,6 @@ public class EnemyCreation : MonoBehaviour {
 		else if(enemType == EnemyType.Shooter){
 			enemy = enemy.SpawnEnemyShooter ();
 		}
-
 	}
 
 	// Update is called once per frame
