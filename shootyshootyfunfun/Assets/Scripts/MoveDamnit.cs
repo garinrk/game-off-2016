@@ -5,7 +5,6 @@ public class MoveDamnit : MonoBehaviour {
 
 	public float playerSpeedHorizontal = 1f;
 	public float playerSpeedVertical = 1f;
-	public GameObject bullet;
 	Vector3 left;
 	Vector3 right;
 	Vector3 up;
@@ -33,13 +32,5 @@ public class MoveDamnit : MonoBehaviour {
 		if(Input.GetKey("d")){
 			transform.Translate(right*Time.deltaTime);
 		}
-		if(Input.GetButtonDown("Fire1")){
-			ShootyShooot ();
-		}
-	}
-
-	void ShootyShooot (){
-		GameObject spawnedBullet = (GameObject)Instantiate (bullet, transform.transform.position, transform.rotation);
-		spawnedBullet.GetComponent<ShootDamnit> ().direction = lookDirection;
 	}
 }
