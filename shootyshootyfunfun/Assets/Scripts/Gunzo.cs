@@ -24,10 +24,6 @@ public class Gunzo : MonoBehaviour {
 			CameraManager.instance.ShakeCamera(0.08f,0.1f);
 			StartCoroutine (GunDelay());
 		}
-		if(Input.GetButton("Fire2")){
-			CameraManager.instance.ShakeCamera(0.08f,0.1f);
-			//Play melee animation
-		}
 	}
 
 	void ShootyShooot (){
