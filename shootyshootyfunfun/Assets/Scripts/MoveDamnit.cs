@@ -23,7 +23,7 @@ public class MoveDamnit : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if(Input.GetKeyDown("w")){
+		if(Input.GetKey("w")){
 			transform.Translate(up*Time.deltaTime);
 		}
 		if(Input.GetKey("a")){
