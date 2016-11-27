@@ -3,11 +3,6 @@ using System.Collections;
 
 public class Gunzo : MonoBehaviour {
 
-<<<<<<< HEAD
-	// Use this for initialization
-	void Start () {
-	
-=======
 	public GameObject gun;
 	public GameObject bullet;
 	public float shootDelay;
@@ -16,14 +11,10 @@ public class Gunzo : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		readyToShoot = true;
->>>>>>> refs/remotes/origin/bharat
 	}
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
-		
-=======
 		Vector3 mousePosition = getMouseDirection();
 		float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -51,6 +42,5 @@ public class Gunzo : MonoBehaviour {
 	IEnumerator GunDelay(){
 		yield return new WaitForSeconds (shootDelay);
 		readyToShoot = true;
->>>>>>> refs/remotes/origin/bharat
 	}
 }

@@ -5,10 +5,6 @@ public class MoveDamnit : MonoBehaviour {
 
 	public float playerSpeedHorizontal = 1f;
 	public float playerSpeedVertical = 1f;
-<<<<<<< HEAD
-	public GameObject bullet;
-=======
->>>>>>> refs/remotes/origin/bharat
 	Vector3 left;
 	Vector3 right;
 	Vector3 up;
@@ -27,11 +23,7 @@ public class MoveDamnit : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-<<<<<<< HEAD
-		if(Input.GetKeyDown("w")){
-=======
 		if(Input.GetKey("w")){
->>>>>>> refs/remotes/origin/bharat
 			transform.Translate(up*Time.deltaTime);
 		}
 		if(Input.GetKey("a")){
@@ -40,16 +32,5 @@ public class MoveDamnit : MonoBehaviour {
 		if(Input.GetKey("d")){
 			transform.Translate(right*Time.deltaTime);
 		}
-<<<<<<< HEAD
-		if(Input.GetButtonDown("Fire1")){
-			ShootyShooot ();
-		}
-	}
-
-	void ShootyShooot (){
-		GameObject spawnedBullet = (GameObject)Instantiate (bullet, transform.transform.position, transform.rotation);
-		spawnedBullet.GetComponent<ShootDamnit> ().direction = lookDirection;
-=======
->>>>>>> refs/remotes/origin/bharat
 	}
 }

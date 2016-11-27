@@ -12,10 +12,6 @@ public class ShootDamnit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
-		transform.Translate (direction * bulletSpeed);
-=======
 		transform.Translate (direction * bulletSpeed*Time.deltaTime);
->>>>>>> refs/remotes/origin/bharat
 	}
 }
