@@ -12,6 +12,8 @@ public class StartMenuManager : MonoBehaviour {
     float fade_factor = 2f;
 
     bool loading = false;
+
+    bool loadingIn = true;
     private void Awake()
     {
         fade_cg = fadeObject.GetComponent<CanvasGroup>();
@@ -27,7 +29,7 @@ public class StartMenuManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.anyKeyDown & !loading)
+        if (Input.anyKeyDown & !loading && !loadingIn)
         {
             loading = true;
             StartCoroutine(FadeOutToLevel());
@@ -58,5 +60,7 @@ public class StartMenuManager : MonoBehaviour {
             fade_cg.alpha -= Time.deltaTime / fade_factor;
             yield return null;
         }
+
+        loadingIn = false;
     }
 }

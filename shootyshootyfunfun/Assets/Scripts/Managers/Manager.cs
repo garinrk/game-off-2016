@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
 
@@ -23,13 +23,8 @@ public class Manager : MonoBehaviour {
 	[SerializeField]
 	EnemySpawner spawner6;
 
-    float roundOneTime;
-    float roundTwoTime;
-    float roundThreeTime;
-    float roundFourTime;
-
-
-
+    
+    
     [SerializeField]
     public int currentRound = 0;
     private void Awake()
@@ -50,14 +45,15 @@ public class Manager : MonoBehaviour {
         Physics.gravity = gameGravity;
     }
     // Use this for initialization
-    void Start () {	
-		SendStartRound ();
-        
-	}
+    void Start () {
+        SendStartRound();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (Input.GetKeyUp("s"))
+            SendStartRound();
 
     }
 
@@ -96,4 +92,9 @@ public class Manager : MonoBehaviour {
 		spawner6.enemyPrefab.enemType = EnemyType.Shooter;
 		Instantiate (spawner6.enemyPrefab,spawner6.transform.position,Quaternion.identity);
 	}
+
+    public void EndGame()
+    {
+        Debug.Log("Game Over");
+    }
 }
