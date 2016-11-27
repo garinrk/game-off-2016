@@ -23,6 +23,12 @@ public class Manager : MonoBehaviour {
 	[SerializeField]
 	EnemySpawner spawner6;
 
+    float roundOneTime;
+    float roundTwoTime;
+    float roundThreeTime;
+    float roundFourTime;
+
+
 
     [SerializeField]
     public int currentRound = 0;

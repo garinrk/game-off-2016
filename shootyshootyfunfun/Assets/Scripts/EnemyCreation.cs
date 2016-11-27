@@ -111,6 +111,8 @@ public class EnemyCreation : MonoBehaviour {
 				this.transform.position += new Vector3 (enemy.speed/1.5f, 0.0f,0.0f)* Time.deltaTime;
 			else
 				this.transform.position += new Vector3 (-enemy.speed/1.5f, 0.0f,0.0f)* Time.deltaTime;
+
+
 		} else if (enemType == EnemyType.BounceBack) {
 			if (!enemy.collided) {
 				this.transform.position += new Vector3 (dirX * (enemy.speed / 1.5f), dirY * (enemy.speed / 1.5f), 0.0f) * Time.deltaTime;
