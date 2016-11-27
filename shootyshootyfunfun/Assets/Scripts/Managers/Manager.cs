@@ -10,8 +10,7 @@ public class Manager : MonoBehaviour {
 
     public Vector3 gameGravity = new Vector3(0, -1.0f, 0);
     
-    //managers    
-    private CameraManager cmra_mgr;
+
 
     [SerializeField]
     private int currentRound = 0;
