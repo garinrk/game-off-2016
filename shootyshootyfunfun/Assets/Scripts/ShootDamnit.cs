@@ -17,7 +17,7 @@ public class ShootDamnit : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider){
 
-		print (collider.gameObject.tag);
+		//print (collider.gameObject.tag);
 
 		if (collider.gameObject.tag != "Player" && collider.gameObject.tag != "Switch") {
 			Destroy (gameObject);

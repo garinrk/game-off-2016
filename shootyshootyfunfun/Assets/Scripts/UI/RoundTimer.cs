@@ -117,6 +117,7 @@ public class RoundTimer : MonoBehaviour {
 				currentElapsedRoundTime = 0.0f;
 				//countdownTextOnScreen.text = "Round " + Manager.instance.currentRound + " OVER!";
                 SetMarkerComplete(current_round);
+                Manager.instance.ResetRound();
 				return;
 			} else {
 				currentElapsedRoundTime += Time.deltaTime;

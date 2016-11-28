@@ -23,10 +23,13 @@ public class Manager : MonoBehaviour {
 	[SerializeField]
 	EnemySpawner spawner6;
 
-    
-    
     [SerializeField]
-    public int currentRound = 0;
+    GameObject consoleMessageObject;
+    [SerializeField]
+    GameObject hackingTriggerObject;
+
+    [SerializeField]
+    int currentRound = 0;
     private void Awake()
     {
 
@@ -57,7 +60,7 @@ public class Manager : MonoBehaviour {
 
     }
 
-    private void SendStartRound()
+    public void SendStartRound()
     {
         //wow that's ugly as fuck, sorry fam
         if (UIManager.instance.timer.isCountingToRoundStart || UIManager.instance.timer.isCountingToStartRemoval)
@@ -96,5 +99,12 @@ public class Manager : MonoBehaviour {
     public void EndGame()
     {
         Debug.Log("Game Over");
+    }
+
+
+    public void ResetRound()
+    {
+        consoleMessageObject.SetActive(true);
+        hackingTriggerObject.GetComponent<HackingTrigger>().Reset();
     }
 }
