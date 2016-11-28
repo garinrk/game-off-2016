@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveDamnit : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	public float playerSpeedHorizontal = 1f;
 	public float playerSpeedVertical = 1f;
@@ -12,17 +12,28 @@ public class MoveDamnit : MonoBehaviour {
 	public Animator playerAnimator;
 	public Animation playerAnimation;
 	public float maxDownTime =1;
-	bool jump;
-	bool grounded = true;
-
+	Animator meleeAnimator;
 	bool isMoving;
 	Rigidbody rb;
 
 	[SerializeField]
 	float downScale;
 
+	[SerializeField]
+	GameObject melee;
+
+	[SerializeField]
+	GameObject gunArm;
+
+	[SerializeField]
+	float meleeSleep;
+
+	bool isMeleeReady;
+
 	void Awake(){
 		rb = GetComponent<Rigidbody> ();
+		melee.SetActive (false);
+		meleeAnimator = melee.GetComponent<Animator> ();
 	}
 	// Use this for initialization
 	void Start () { 
@@ -32,7 +43,7 @@ public class MoveDamnit : MonoBehaviour {
 		playerAnimator = GetComponent<Animator> ();
 		playerAnimation = GetComponent<Animation> ();
 		isMoving = false;
-		jump = true;
+		isMeleeReady = true;
 	}
 	
 	// Update is called once per frame
@@ -42,11 +53,7 @@ public class MoveDamnit : MonoBehaviour {
 
 	void FixedUpdate(){
 		if (Input.GetKey("w")) {
-
-
 				rb.MovePosition (rb.position + up * Time.deltaTime);
-
-
 		}
 		if(Input.GetKey("a")){			
 			playerAnimator.Play ("Move");
@@ -59,6 +66,14 @@ public class MoveDamnit : MonoBehaviour {
 		}else{
 			isMoving = false;
 		}
+		if(Input.GetButtonDown("Fire2") && isMeleeReady){
+			isMeleeReady = false;
+			gunArm.SetActive (false);
+			CameraManager.instance.ShakeCamera(0.08f,0.1f);
+			melee.SetActive(true);
+			meleeAnimator.Play("Melee");
+			StartCoroutine (WaitForAnimation ());
+		}
 		if(!isMoving){			
 			playerAnimator.Play ("Idle");
 		}
@@ -68,5 +83,13 @@ public class MoveDamnit : MonoBehaviour {
 		if (collision.transform.tag == "Platform") {		
 			//rb.MovePosition (rb.position - up * Time.deltaTime*2);
 		}
+	}
+
+	IEnumerator WaitForAnimation(){
+		yield return new WaitForSeconds (0.5f);
+		melee.SetActive(false);
+		gunArm.SetActive (true);
+		yield return new WaitForSeconds (meleeSleep);
+		isMeleeReady = true;
 	}
 }
