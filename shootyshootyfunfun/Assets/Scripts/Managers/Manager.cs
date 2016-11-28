@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor.Animations;
 using System;
 using UnityEngine.UI;
 
@@ -45,6 +46,19 @@ public class Manager : MonoBehaviour {
 
     [SerializeField]
     int currentRound = 0;
+
+    [SerializeField]
+    AnimatorController[] animators;
+
+    [SerializeField]
+    Sprite armUpgrade;
+
+    [SerializeField]
+    GameObject player;
+
+    [SerializeField]
+    GameObject gunArm;
+
     private void Awake()
     {
 
@@ -126,18 +140,46 @@ public class Manager : MonoBehaviour {
 
     public void ResetRound()
     {
+        //sets hacking message to show again effectively the end of round
         consoleMessageObject.SetActive(true);
         hackingTriggerObject.GetComponent<HackingTrigger>().Reset();
+        UpgradePlayer();
+    }
+
+    void UpgradePlayer()
+    {
+        switch (currentRound)
+        {
+            case 1:
+                player.GetComponent<Animator>().runtimeAnimatorController = animators[0];
+                break;
+
+            case 2:
+                gunArm.GetComponent<SpriteRenderer>().sprite = armUpgrade;
+                break;
+
+            case 3:
+                player.GetComponent<Animator>().runtimeAnimatorController = animators[1];
+                break;
+
+            case 4:
+                player.GetComponent<Animator>().runtimeAnimatorController = animators[2];
+                break;
+        }
     }
 
     public void DisplayChatBubbles(int round)
     {
-        Sprite heroWords = heroBubbles[round - 1];
-        Sprite villianWords = villianBubbles[round - 1];
-
-        hero_renderer.sprite = heroWords;
-        villian_renderer.sprite = villianWords;
-
+        if (round < heroBubbles.Length)
+        {
+            Sprite heroWords = heroBubbles[round - 1];
+            hero_renderer.sprite = heroWords;
+        }
+        if (round < villianBubbles.Length)
+        {
+            Sprite villianWords = villianBubbles[round - 1];
+            villian_renderer.sprite = villianWords;
+        }
         StartCoroutine(DissappearChatBubbles());
     }
 
