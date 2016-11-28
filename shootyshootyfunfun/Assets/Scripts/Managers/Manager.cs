@@ -59,6 +59,9 @@ public class Manager : MonoBehaviour {
     [SerializeField]
     GameObject gunArm;
 
+	[SerializeField]
+	GameObject DynamicMusicSystem;
+
     private void Awake()
     {
 
@@ -85,7 +88,7 @@ public class Manager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //SendStartRound();
-
+		DynamicMusicSystem.GetComponent<DynamicMusicSystem> ().ToggleSynths();
     }
 	
 	// Update is called once per frame
@@ -144,25 +147,51 @@ public class Manager : MonoBehaviour {
         consoleMessageObject.SetActive(true);
         hackingTriggerObject.GetComponent<HackingTrigger>().Reset();
         UpgradePlayer();
+		AddMusicLayer ();
     }
+
+	void AddMusicLayer(){
+		switch (currentRound)
+		{
+		case 1:
+			DynamicMusicSystem.GetComponent<DynamicMusicSystem> ().ToggleAdvDrums();
+			break;
+
+		case 2:
+			DynamicMusicSystem.GetComponent<DynamicMusicSystem> ().ToggleBells();
+			break;
+
+		case 3:
+			DynamicMusicSystem.GetComponent<DynamicMusicSystem> ().ToggleFunkBass();
+			break;
+
+		case 4:
+			DynamicMusicSystem.GetComponent<DynamicMusicSystem> ().ToggleFunkGuitar();
+			break;
+		}
+	}
 
     void UpgradePlayer()
     {
         switch (currentRound)
         {
             case 1:
+			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
                 player.GetComponent<Animator>().runtimeAnimatorController = animators[0];
                 break;
 
             case 2:
+			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
                 gunArm.GetComponent<SpriteRenderer>().sprite = armUpgrade;
                 break;
 
             case 3:
+			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
                 player.GetComponent<Animator>().runtimeAnimatorController = animators[1];
                 break;
 
             case 4:
+			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
                 player.GetComponent<Animator>().runtimeAnimatorController = animators[2];
                 break;
         }

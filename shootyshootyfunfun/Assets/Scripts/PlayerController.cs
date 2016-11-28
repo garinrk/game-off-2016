@@ -29,11 +29,15 @@ public class PlayerController : MonoBehaviour {
 	float meleeSleep;
 
 	bool isMeleeReady;
+	int playerHealth = 3;
+	BoxCollider meleeColider;
 
 	void Awake(){
 		rb = GetComponent<Rigidbody> ();
 		melee.SetActive (false);
 		meleeAnimator = melee.GetComponent<Animator> ();
+		meleeColider = melee.GetComponent<BoxCollider> ();
+		meleeColider.enabled = false;
 	}
 	// Use this for initialization
 	void Start () { 
@@ -67,6 +71,8 @@ public class PlayerController : MonoBehaviour {
 			isMoving = false;
 		}
 		if(Input.GetButtonDown("Fire2") && isMeleeReady){
+			meleeColider.enabled = true;
+			SoundManager.instance.play (SoundClip.PlayerMelee);
 			isMeleeReady = false;
 			gunArm.SetActive (false);
 			CameraManager.instance.ShakeCamera(0.08f,0.1f);
@@ -79,9 +85,14 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision collision){
-		if (collision.transform.tag == "Platform") {		
-			//rb.MovePosition (rb.position - up * Time.deltaTime*2);
+	void OnCollisionEnter(Collision collision){		
+		if (collision.transform.tag == "Enemy") {
+			playerHealth--;
+			SoundManager.instance.play (SoundClip.PlayerHurt);
+			print (playerHealth);
+			if (playerHealth < 0) {
+				//Game over
+			}
 		}
 	}
 
@@ -89,6 +100,7 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds (0.5f);
 		melee.SetActive(false);
 		gunArm.SetActive (true);
+		meleeColider.enabled = false;
 		yield return new WaitForSeconds (meleeSleep);
 		isMeleeReady = true;
 	}

@@ -213,12 +213,10 @@ public class EnemyCreation : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider)
 	{
-
 		if (collider.transform.tag == "Bullet") {
+			SoundManager.instance.play (SoundClip.EnemyDeath);
 			Destroy (gameObject);
-
 		}
-
 	}
 
 

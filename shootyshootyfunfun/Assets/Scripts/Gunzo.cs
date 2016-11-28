@@ -18,7 +18,8 @@ public class Gunzo : MonoBehaviour {
 		Vector3 mousePosition = getMouseDirection();
 		float angle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-		if(Input.GetButton("Fire1") && readyToShoot){			
+		if(Input.GetButton("Fire1") && readyToShoot){
+			SoundManager.instance.play (SoundClip.PlayerShoot);
 			ShootyShooot ();
 			readyToShoot = false;
 			CameraManager.instance.ShakeCamera(0.08f,0.1f);
