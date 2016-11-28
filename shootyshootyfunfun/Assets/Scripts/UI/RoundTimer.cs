@@ -160,7 +160,11 @@ public class RoundTimer : MonoBehaviour {
 
     void SetMarkerComplete(int roundToSet)
     {
+        if (roundToSet >= 5)
+            return;
+
         GameObject marker = markerObjects[roundToSet - 1];
+               
         Color c = marker.GetComponent<Image>().color;
         c = completedMarkerColor;
         marker.GetComponent<Image>().color = c;

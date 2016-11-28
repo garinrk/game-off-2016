@@ -9,8 +9,14 @@ public class Manager : MonoBehaviour {
     public static Manager instance = null;
 
     public Vector3 gameGravity = new Vector3(0, -1.0f, 0);
-    
-	[SerializeField]
+
+    [SerializeField]
+    Sprite[] villianBubbles;
+
+    [SerializeField]
+    Sprite[] heroBubbles;
+
+    [SerializeField]
 	EnemySpawner spawner1;
 	[SerializeField]
 	EnemySpawner spawner2;
@@ -27,6 +33,15 @@ public class Manager : MonoBehaviour {
     GameObject consoleMessageObject;
     [SerializeField]
     GameObject hackingTriggerObject;
+
+    [SerializeField]
+    GameObject heroChatBubbleObject;
+
+    [SerializeField]
+    GameObject villianChatBubbleObject;
+
+    SpriteRenderer hero_renderer;
+    SpriteRenderer villian_renderer;
 
     [SerializeField]
     int currentRound = 0;
@@ -46,6 +61,12 @@ public class Manager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         
         Physics.gravity = gameGravity;
+
+        hero_renderer = heroChatBubbleObject.GetComponent<SpriteRenderer>();
+        villian_renderer = villianChatBubbleObject.GetComponent<SpriteRenderer>();
+
+        hero_renderer.sprite = null;
+        villian_renderer.sprite = null;
     }
     // Use this for initialization
     void Start () {
@@ -67,6 +88,7 @@ public class Manager : MonoBehaviour {
             return;
         currentRound++;
         UIManager.instance.StartNewRound(currentRound);
+        DisplayChatBubbles(currentRound);
     }
 
     private void SendShake()
@@ -106,5 +128,26 @@ public class Manager : MonoBehaviour {
     {
         consoleMessageObject.SetActive(true);
         hackingTriggerObject.GetComponent<HackingTrigger>().Reset();
+    }
+
+    public void DisplayChatBubbles(int round)
+    {
+        Sprite heroWords = heroBubbles[round - 1];
+        Sprite villianWords = villianBubbles[round - 1];
+
+        hero_renderer.sprite = heroWords;
+        villian_renderer.sprite = villianWords;
+
+        StartCoroutine(DissappearChatBubbles());
+    }
+
+
+    IEnumerator DissappearChatBubbles()
+    {
+        yield return new WaitForSeconds(5);
+
+        hero_renderer.sprite = null;
+        villian_renderer.sprite = null;
+
     }
 }
