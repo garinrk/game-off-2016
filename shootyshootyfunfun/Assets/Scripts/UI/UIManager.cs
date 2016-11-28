@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour {
 
     [HideInInspector]
     public RoundTimer timer;
-    private Text roundText;
+    //private Text roundText;
 
     public static UIManager instance = null;
 
@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour {
 
         //initialization
         timer = roundTimerObject.GetComponent<RoundTimer>();
-        roundText = roundTextObject.GetComponent<Text>();
+        //roundText = roundTextObject.GetComponent<Text>();
 
 
         timer.masterRoundTime = masterRoundTime;
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour {
 
     public void StartNewRound(int new_round)
     {
-        roundText.text = "Round " + new_round.ToString();
+        //roundText.text = "Round " + new_round.ToString();
         timer.StartNewRound();
     }
 
