@@ -194,7 +194,8 @@ public class RoundTimer : MonoBehaviour {
         if (isCountingToRoundStart)
         {
             countdownTime -= Time.deltaTime;
-            countdownTextOnScreen.text = countdownTime.ToString();
+			int timer = (int)countdownTime;
+			countdownTextOnScreen.text = timer.ToString();
         }
         if (isCountingToRoundStart && countdownTime <= 0)
         {

@@ -19,7 +19,7 @@ public class ShootDamnit : MonoBehaviour {
 
 		//print (collider.gameObject.tag);
 
-		if (collider.gameObject.tag != "Player" && collider.gameObject.tag != "Switch") {
+		if (collider.gameObject.tag != "Player" && collider.gameObject.tag != "Switch"&& collider.gameObject.tag != "Launcher") {
 			Destroy (gameObject);
 		}
 	}

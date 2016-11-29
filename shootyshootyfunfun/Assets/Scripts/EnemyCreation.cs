@@ -12,7 +12,7 @@ public class Enemy{
 
 	//The member variables of enemy
 
-	private int healthPoints;
+	public int healthPoints;
 	public float speed;
 	private bool angry;
 	public bool collided = false;
@@ -20,6 +20,7 @@ public class Enemy{
 	public bool changedDirection = false;
 	public bool hasWeapon = false;
 	public GameObject targetObject;
+
 
 	public EnemyType enemType;
 
@@ -41,7 +42,7 @@ public class Enemy{
 
 	//Spawn methods for the different enemy types
 	public Enemy SpawnEnemyVanilla(){
-		Enemy enemy = new Enemy (100,5.0f,false,EnemyType.Vanilla,Vector3.zero,false);
+		Enemy enemy = new Enemy (1,5.0f,false,EnemyType.Vanilla,Vector3.zero,false);
 		return enemy;
 	}
 
@@ -56,7 +57,7 @@ public class Enemy{
 	}
 
 	public Enemy SpawnEnemyShooter(){
-		Enemy enemy = new Enemy (100,5.0f,false,EnemyType.Shooter,Vector3.zero,true);
+		Enemy enemy = new Enemy (3,5.0f,false,EnemyType.Shooter,Vector3.zero,true);
 		return enemy;
 	}
 
@@ -68,6 +69,13 @@ public class EnemyCreation : MonoBehaviour {
 
 	private Enemy enemy;
 	public EnemyType enemType;
+	public AnimatorOverrideController animatorControllerVanilla;
+	public AnimatorOverrideController animatorControllerShooter;
+	public Animator monsterAnimator; // the default is the monster shooter controller
+	public int direction = 1;
+
+	Vector3 up;
+	Rigidbody rb;
 
 	//For the bounce back enemy
 	float dirX = 1.0f;
@@ -89,9 +97,13 @@ public class EnemyCreation : MonoBehaviour {
 	public float fireRate;
 	private float currentTime = 0.0f;
 
+
+
+
+
 	//The enemy movement function for the different enemy types
 	private void EnemyMovement(){
-
+		
 		if (enemy.changedDirection) {
 			dirX = randomDirection ();
 			dirY = randomDirection ();
@@ -102,15 +114,15 @@ public class EnemyCreation : MonoBehaviour {
 		if (enemType == EnemyType.Vanilla) {
 
 			if(!enemy.collided)
-				this.transform.position += new Vector3 (enemy.speed, 0.0f,0.0f) * Time.deltaTime;
+				this.transform.position += new Vector3 (direction * enemy.speed, 0.0f,0.0f) * Time.deltaTime;
 			else
-				this.transform.position += new Vector3 (-enemy.speed, 0.0f,0.0f)* Time.deltaTime;
+				this.transform.position += new Vector3 (direction *-enemy.speed, 0.0f,0.0f)* Time.deltaTime;
 
 		} else if (enemType == EnemyType.BigVanilla) {
 			if(!enemy.collided)
-				this.transform.position += new Vector3 (enemy.speed/1.5f, 0.0f,0.0f)* Time.deltaTime;
+				this.transform.position += new Vector3 (direction *enemy.speed/1.5f, 0.0f,0.0f)* Time.deltaTime;
 			else
-				this.transform.position += new Vector3 (-enemy.speed/1.5f, 0.0f,0.0f)* Time.deltaTime;
+				this.transform.position += new Vector3 (direction *-enemy.speed/1.5f, 0.0f,0.0f)* Time.deltaTime;
 
 
 		} else if (enemType == EnemyType.BounceBack) {
@@ -123,9 +135,9 @@ public class EnemyCreation : MonoBehaviour {
 		
 		}else if(enemType == EnemyType.Shooter){
 			if(!enemy.collided)
-				this.transform.position += new Vector3 (enemy.speed, 0.0f,0.0f) * Time.deltaTime;
+				this.transform.position += new Vector3 (direction *enemy.speed, 0.0f,0.0f) * Time.deltaTime;
 			else
-				this.transform.position += new Vector3 (-enemy.speed, 0.0f,0.0f)* Time.deltaTime;
+				this.transform.position += new Vector3 (direction *-enemy.speed, 0.0f,0.0f)* Time.deltaTime;
 		}
 	}
 
@@ -162,15 +174,23 @@ public class EnemyCreation : MonoBehaviour {
 		}
 	}
 
-
+	private void Jump(){
+		rb.AddForce(up* 200.0f);
+	}
 
 	// Use this for initialization
 	void Awake () {
+		
+
 		enemy = new Enemy();
+		rb = GetComponent<Rigidbody> ();
+
+
 		gameObject.GetComponent<SpriteRenderer> ().sprite = enemyVanillaSprite;
 
 		//Pick the right enemy
 		if (enemType == EnemyType.Vanilla) {
+			monsterAnimator.runtimeAnimatorController = animatorControllerVanilla;
 			enemy = enemy.SpawnEnemyVanilla ();
 		}
 		else if(enemType == EnemyType.BigVanilla){
@@ -180,8 +200,11 @@ public class EnemyCreation : MonoBehaviour {
 			enemy = enemy.SpawnEnemyBounceBack ();
 		}
 		else if(enemType == EnemyType.Shooter){
+			monsterAnimator.runtimeAnimatorController = animatorControllerShooter;
 			enemy = enemy.SpawnEnemyShooter ();
 		}
+
+		up = new Vector3 (0f, enemy.speed, 0f);
 	}
 
 	// Update is called once per frame
@@ -205,8 +228,7 @@ public class EnemyCreation : MonoBehaviour {
 			enemy.changedDirection = !enemy.changedDirection;
 			gameObject.transform.localScale = new Vector3 (-gameObject.transform.localScale.x,gameObject.transform.localScale.y,gameObject.transform.localScale.z);
 		} 
-
-
+			
 
 
 	}
@@ -215,8 +237,19 @@ public class EnemyCreation : MonoBehaviour {
 	{
 		if (collider.transform.tag == "Bullet") {
 			SoundManager.instance.play (SoundClip.EnemyDeath);
-			Destroy (gameObject);
+			enemy.healthPoints--;
+
+			if (enemy.healthPoints <= 0) {
+				Destroy (gameObject);
+			}
 		}
+
+		if (collider.transform.tag == "Launcher") {
+
+			if(PlayerController.getInstance().transform.position.y > gameObject.transform.position.y)
+			Jump ();
+		}
+
 	}
 
 

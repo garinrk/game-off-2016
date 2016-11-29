@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
+
+
 public class PlayerController : MonoBehaviour {
+
+	private static PlayerController instance;
+
+	public static PlayerController getInstance(){		
+		return instance;
+	}
 
 	public float playerSpeedHorizontal = 1f;
 	public float playerSpeedVertical = 1f;
@@ -29,10 +38,11 @@ public class PlayerController : MonoBehaviour {
 	float meleeSleep;
 
 	bool isMeleeReady;
-	int playerHealth = 3;
+	public int playerHealth = 3;
 	BoxCollider meleeColider;
 
 	void Awake(){
+		instance = this;
 		rb = GetComponent<Rigidbody> ();
 		melee.SetActive (false);
 		meleeAnimator = melee.GetComponent<Animator> ();
@@ -89,9 +99,10 @@ public class PlayerController : MonoBehaviour {
 		if (collision.transform.tag == "Enemy") {
 			playerHealth--;
 			SoundManager.instance.play (SoundClip.PlayerHurt);
-			print (playerHealth);
 			if (playerHealth < 0) {
-				//Game over
+				SceneManager.LoadScene (0);
+			} else {
+				Manager.instance.ChangeBackGround (playerHealth);
 			}
 		}
 	}

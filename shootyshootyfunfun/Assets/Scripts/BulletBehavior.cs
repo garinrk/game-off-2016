@@ -32,6 +32,8 @@ public class BulletBehavior : MonoBehaviour {
 		//Do not collide with the enemy
 		if(collision.gameObject.layer != 8)
 			Destroy (gameObject);
+
+	
 	}
 
 

@@ -29,7 +29,7 @@ public class HackingTrigger : MonoBehaviour {
     
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player" && Input.GetKeyDown("h") && triggered == false)
+		if(other.tag == "Player" && Input.GetKeyDown(KeyCode.H) && triggered == false)
         {
             triggered = true;
             Manager.instance.SendStartRound();
