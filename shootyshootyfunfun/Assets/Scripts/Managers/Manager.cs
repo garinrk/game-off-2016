@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Manager : MonoBehaviour {
 
 
@@ -103,11 +103,13 @@ public class Manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
     }
 
     public void SendStartRound()
     {
+
+        if (currentRound == 6)
+            EndGame();
         //wow that's ugly as fuck, sorry fam
         if (UIManager.instance.timer.isCountingToRoundStart || UIManager.instance.timer.isCountingToStartRemoval)
             return;
@@ -699,7 +701,7 @@ public class Manager : MonoBehaviour {
 
     public void EndGame()
     {
-        Debug.Log("Game Over");
+        SceneManager.LoadScene(2);
     }
 
 
