@@ -68,9 +68,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		if (Input.GetKey("w")) {
-				rb.MovePosition (rb.position + up * Time.deltaTime);
+		if (Input.GetKey("w")) {			
+			rb.MovePosition (rb.position + up * Time.deltaTime);
 		}
+		//if (Input.GetKeyDown ("w")) {
+			//SoundManager.instance.play (SoundClip.PlayerJump);
+		//}
 		if(Input.GetKey("a")){			
 			playerAnimator.Play ("Move");
 			isMoving = true;

@@ -6,7 +6,8 @@ public enum SoundClip{
 	PlayerHurt,
 	PlayerMelee,
 	PlayerShoot,
-	PlayerSuitEquip
+	PlayerSuitEquip,
+	PlayerJump
 };
 
 public class SoundManager : MonoBehaviour {
@@ -35,6 +36,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public void play(SoundClip clip){
-		sources [(int)clip].Play ();
+			sources [(int)clip].Play ();
+		}
 	}
 }
