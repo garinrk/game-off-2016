@@ -57,7 +57,7 @@ public class Enemy{
 	}
 
 	public Enemy SpawnEnemyShooter(){
-		Enemy enemy = new Enemy (3,5.0f,false,EnemyType.Shooter,Vector3.zero,true);
+		Enemy enemy = new Enemy (3,2.5f,false,EnemyType.Shooter,Vector3.zero,true);
 		return enemy;
 	}
 
@@ -73,6 +73,8 @@ public class EnemyCreation : MonoBehaviour {
 	public AnimatorOverrideController animatorControllerShooter;
 	public Animator monsterAnimator; // the default is the monster shooter controller
 	public int direction = 1;
+	private SpriteRenderer sr;
+
 
 	Vector3 up;
 	Rigidbody rb;
@@ -157,15 +159,11 @@ public class EnemyCreation : MonoBehaviour {
 
 			if (enemy.hasWeapon) {
 
-
-				float direction = 0.0f;
-				if (gameObject.transform.localScale.x > 0.0f) {
-					direction = 1.0f;
+				if (sr.flipX) {
+					enemyBullet.GetComponent<BulletBehavior> ().direction = 1.0f; 
+				} else {
+					enemyBullet.GetComponent<BulletBehavior> ().direction = -1.0f; 
 				}
-				else if (gameObject.transform.localScale.x < 0.0f){
-					direction = -1.0f;
-				}
-				enemyBullet.GetComponent<BulletBehavior> ().direction = direction; 
 				Instantiate (enemyBullet, gameObject.transform.position, new Quaternion(0.0f,0.0f,0.0f,0.0f));
 
 			}
@@ -175,7 +173,7 @@ public class EnemyCreation : MonoBehaviour {
 	}
 
 	private void Jump(){
-		rb.AddForce(up* 200.0f);
+		rb.AddForce (up * 1200.0f/enemy.speed);
 	}
 
 	// Use this for initialization
@@ -184,7 +182,7 @@ public class EnemyCreation : MonoBehaviour {
 
 		enemy = new Enemy();
 		rb = GetComponent<Rigidbody> ();
-
+		sr = GetComponent<SpriteRenderer> ();
 
 		gameObject.GetComponent<SpriteRenderer> ().sprite = enemyVanillaSprite;
 
@@ -219,7 +217,7 @@ public class EnemyCreation : MonoBehaviour {
 		if (collision.transform.tag == "Wall") {
 
 			enemy.collided = !enemy.collided;
-			gameObject.transform.localScale = new Vector3 (-gameObject.transform.localScale.x,gameObject.transform.localScale.y,gameObject.transform.localScale.z);
+			sr.flipX = !sr.flipX;
 
 		}
 
@@ -238,9 +236,14 @@ public class EnemyCreation : MonoBehaviour {
 		if (collider.transform.tag == "Bullet") {
 			SoundManager.instance.play (SoundClip.EnemyDeath);
 			enemy.healthPoints--;
-
+			Color damageColor = new Color ();
+			ColorUtility.TryParseHtmlString ("#FF0000FF", out damageColor);
+			GetComponent<SpriteRenderer> ().color = damageColor;
+			StartCoroutine (DamageCoolDown ());
 			if (enemy.healthPoints <= 0) {
 				Destroy (gameObject);
+				EnemyDeathEffect.Instance.transform.position = transform.position;
+				EnemyDeathEffect.Instance.Burst ();
 			}
 		}
 
@@ -252,7 +255,9 @@ public class EnemyCreation : MonoBehaviour {
 
 	}
 
-
-
+	IEnumerator DamageCoolDown(){
+		yield return new WaitForSeconds (0.2f);
+		GetComponent<SpriteRenderer> ().color = Color.white;
+	}
 
 }

@@ -24,6 +24,7 @@ public class Gunzo : MonoBehaviour {
 			readyToShoot = false;
 			CameraManager.instance.ShakeCamera(0.08f,0.1f);
 			StartCoroutine (GunDelay());
+			ShellEmitter.Instance.Burst ();
 		}
 	}
 

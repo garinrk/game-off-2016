@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor.Animations;
 using System;
 using UnityEngine.UI;
 
@@ -48,7 +47,7 @@ public class Manager : MonoBehaviour {
     int currentRound = 0;
 
     [SerializeField]
-    AnimatorController[] animators;
+    RuntimeAnimatorController[] animators;
 
     [SerializeField]
     Sprite armUpgrade;
@@ -86,7 +85,7 @@ public class Manager : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+       // DontDestroyOnLoad(gameObject);
         
         Physics.gravity = gameGravity;
 
@@ -113,6 +112,11 @@ public class Manager : MonoBehaviour {
         if (UIManager.instance.timer.isCountingToRoundStart || UIManager.instance.timer.isCountingToStartRemoval)
             return;
         currentRound++;
+		player.GetComponent<PlayerController> ().playerHealth++;
+		if (player.GetComponent<PlayerController> ().playerHealth > player.GetComponent<PlayerController> ().maxPlayerHealth) {
+			player.GetComponent<PlayerController> ().playerHealth = player.GetComponent<PlayerController> ().maxPlayerHealth;
+		}
+		ChangeBackGround (player.GetComponent<PlayerController> ().playerHealth);
         UIManager.instance.StartNewRound(currentRound);
         DisplayChatBubbles(currentRound);
     }
@@ -186,7 +190,7 @@ public class Manager : MonoBehaviour {
 		spawner6.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner6.enemyPrefab,spawner6.transform.position,Quaternion.identity);
 	
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -232,7 +236,7 @@ public class Manager : MonoBehaviour {
 		spawner6.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner6.enemyPrefab, spawner6.transform.position, Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -244,6 +248,7 @@ public class Manager : MonoBehaviour {
 		spawner2.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner2.enemyPrefab,spawner2.transform.position,Quaternion.identity);
 
+		yield return new WaitForSeconds (2.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -297,7 +302,7 @@ public class Manager : MonoBehaviour {
 		spawner6.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner6.enemyPrefab,spawner6.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -319,6 +324,7 @@ public class Manager : MonoBehaviour {
 		spawner4.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner4.enemyPrefab,spawner4.transform.position,Quaternion.identity);
 
+		yield return new WaitForSeconds (2.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -330,7 +336,7 @@ public class Manager : MonoBehaviour {
 		spawner2.enemyPrefab.enemType = EnemyType.Shooter;
 		Instantiate (spawner2.enemyPrefab,spawner2.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner3.enemyPrefab.direction = -1;
 		spawner3.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = false;
@@ -385,7 +391,7 @@ public class Manager : MonoBehaviour {
 		spawner6.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner6.enemyPrefab,spawner6.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -406,6 +412,8 @@ public class Manager : MonoBehaviour {
 		spawner4.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = false;
 		spawner4.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner4.enemyPrefab,spawner4.transform.position,Quaternion.identity);
+
+		yield return new WaitForSeconds (2.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -441,6 +449,8 @@ public class Manager : MonoBehaviour {
 
 		//Shooters
 
+		yield return new WaitForSeconds (2.0f);
+
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -452,7 +462,7 @@ public class Manager : MonoBehaviour {
 		spawner2.enemyPrefab.enemType = EnemyType.Shooter;
 		Instantiate (spawner2.enemyPrefab,spawner2.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner3.enemyPrefab.direction = -1;
 		spawner3.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = false;
@@ -516,7 +526,7 @@ public class Manager : MonoBehaviour {
 		spawner6.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner6.enemyPrefab,spawner6.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
@@ -548,7 +558,7 @@ public class Manager : MonoBehaviour {
 		spawner6.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner6.enemyPrefab,spawner6.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 
 		spawner1.enemyPrefab.direction = 1;
@@ -571,6 +581,8 @@ public class Manager : MonoBehaviour {
 		spawner4.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner4.enemyPrefab,spawner4.transform.position,Quaternion.identity);
 
+		yield return new WaitForSeconds (2.0f);
+
 		spawner1.enemyPrefab.direction = 1;
 		spawner1.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = true;
 		spawner1.enemyPrefab.enemType = EnemyType.Vanilla;
@@ -581,7 +593,7 @@ public class Manager : MonoBehaviour {
 		spawner2.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner2.enemyPrefab,spawner2.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner3.enemyPrefab.direction = -1;
 		spawner3.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = false;
@@ -613,7 +625,7 @@ public class Manager : MonoBehaviour {
 		spawner2.enemyPrefab.enemType = EnemyType.Vanilla;
 		Instantiate (spawner2.enemyPrefab,spawner2.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner3.enemyPrefab.direction = -1;
 		spawner3.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = false;
@@ -639,6 +651,8 @@ public class Manager : MonoBehaviour {
 		spawner2.enemyPrefab.enemType = EnemyType.Shooter;
 		Instantiate (spawner2.enemyPrefab,spawner2.transform.position,Quaternion.identity);
 
+		yield return new WaitForSeconds (2.0f);
+
 		spawner3.enemyPrefab.direction = -1;
 		spawner3.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = false;
 		spawner3.enemyPrefab.enemType = EnemyType.Shooter;
@@ -649,7 +663,7 @@ public class Manager : MonoBehaviour {
 		spawner4.enemyPrefab.enemType = EnemyType.Shooter;
 		Instantiate (spawner4.enemyPrefab,spawner4.transform.position,Quaternion.identity);
 
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (3.0f);
 
 		spawner5.enemyPrefab.direction = -1;
 		spawner5.enemyPrefab.GetComponent<SpriteRenderer> ().flipX = false;
@@ -723,25 +737,25 @@ public class Manager : MonoBehaviour {
     {
         switch (currentRound)
         {
-            case 1:
+		case 1:
 			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
-                player.GetComponent<Animator>().runtimeAnimatorController = animators[0];
-                break;
+			player.GetComponent<Animator> ().runtimeAnimatorController = animators [0];
+            break;
 
-            case 2:
+		case 2:
 			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
-                gunArm.GetComponent<SpriteRenderer>().sprite = armUpgrade;
-                break;
+			gunArm.GetComponent<SpriteRenderer> ().sprite = armUpgrade;
+            break;
 
             case 3:
 			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
-                player.GetComponent<Animator>().runtimeAnimatorController = animators[1];
-                break;
+            player.GetComponent<Animator>().runtimeAnimatorController = animators[1];
+            break;
 
             case 4:
 			SoundManager.instance.play (SoundClip.PlayerSuitEquip);
-                player.GetComponent<Animator>().runtimeAnimatorController = animators[2];
-                break;
+            player.GetComponent<Animator>().runtimeAnimatorController = animators[2];
+            break;
         }
     }
 

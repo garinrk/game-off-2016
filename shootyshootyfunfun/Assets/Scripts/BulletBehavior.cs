@@ -36,5 +36,13 @@ public class BulletBehavior : MonoBehaviour {
 	
 	}
 
+	void OnTriggerEnter(Collider collision)
+	{
+		//Do not collide with the enemy
+		if (collision.gameObject.tag == "Player")
+			PlayerController.getInstance ().reducePlayerHealth ();
+
+
+	}
 
 }

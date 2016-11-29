@@ -41,7 +41,7 @@ public class CameraManager : MonoBehaviour
             camTransform = GetComponent(typeof(Transform)) as Transform;
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
 
     }

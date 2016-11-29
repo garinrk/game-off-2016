@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         //initialization
         timer = roundTimerObject.GetComponent<RoundTimer>();

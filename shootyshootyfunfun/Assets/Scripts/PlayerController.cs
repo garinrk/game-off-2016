@@ -38,7 +38,8 @@ public class PlayerController : MonoBehaviour {
 	float meleeSleep;
 
 	bool isMeleeReady;
-	public int playerHealth = 3;
+	public int maxPlayerHealth = 3;
+	public int playerHealth;
 	BoxCollider meleeColider;
 
 	void Awake(){
@@ -50,7 +51,8 @@ public class PlayerController : MonoBehaviour {
 		meleeColider.enabled = false;
 	}
 	// Use this for initialization
-	void Start () { 
+	void Start () {
+		playerHealth = maxPlayerHealth;
 		left = new Vector3 (-playerSpeedHorizontal, 0f, 0f);
 		right = new Vector3 (playerSpeedHorizontal, 0f, 0f);
 		up = new Vector3 (0f, playerSpeedVertical, 0f);
@@ -97,13 +99,17 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){		
 		if (collision.transform.tag == "Enemy") {
-			playerHealth--;
-			SoundManager.instance.play (SoundClip.PlayerHurt);
-			if (playerHealth < 0) {
-				SceneManager.LoadScene (0);
-			} else {
-				Manager.instance.ChangeBackGround (playerHealth);
-			}
+			reducePlayerHealth ();
+		}
+	}
+
+	public void reducePlayerHealth(){
+		playerHealth--;
+		SoundManager.instance.play (SoundClip.PlayerHurt);
+		if (playerHealth < 0) {
+			SceneManager.LoadScene (0);
+		} else {
+			Manager.instance.ChangeBackGround (playerHealth);
 		}
 	}
 
