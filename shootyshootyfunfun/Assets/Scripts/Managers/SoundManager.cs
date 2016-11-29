@@ -37,6 +37,5 @@ public class SoundManager : MonoBehaviour {
 
 	public void play(SoundClip clip){
 			sources [(int)clip].Play ();
-		}
 	}
 }
