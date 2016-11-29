@@ -13,6 +13,9 @@ public class StartMenuManager : MonoBehaviour {
 
     bool loading = false;
 
+	[SerializeField]
+	Texture2D cursorTexture;
+
     bool loadingIn = true;
     private void Awake()
     {
@@ -24,7 +27,7 @@ public class StartMenuManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
+		Cursor.SetCursor(cursorTexture, Vector3.zero, CursorMode.Auto);	
 	}
 	
 	// Update is called once per frame
