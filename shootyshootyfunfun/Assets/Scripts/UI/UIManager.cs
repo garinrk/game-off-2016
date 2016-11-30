@@ -15,6 +15,11 @@ public class UIManager : MonoBehaviour {
 
     [HideInInspector]
     public RoundTimer timer;
+    
+    [SerializeField]
+    float fadeFactor = 2f;
+
+    CanvasGroup cg;
     //private Text roundText;
 
     public static UIManager instance = null;
@@ -34,6 +39,9 @@ public class UIManager : MonoBehaviour {
 
         //initialization
         timer = roundTimerObject.GetComponent<RoundTimer>();
+        cg = gameObject.GetComponent<CanvasGroup>();
+
+        cg.alpha = 1f;
         //roundText = roundTextObject.GetComponent<Text>();
 
 
@@ -45,6 +53,7 @@ public class UIManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        StartCoroutine(FadeIn());
 	
 	}
 	
@@ -57,6 +66,28 @@ public class UIManager : MonoBehaviour {
     {
         //roundText.text = "Round " + new_round.ToString();
         timer.StartNewRound();
+    }
+
+    public IEnumerator FadeOut()
+    {
+
+        while(cg.alpha < 1)
+        {
+            cg.alpha += Time.deltaTime / fadeFactor;
+            yield return null;
+        }
+        Manager.instance.EndGame();
+
+    }
+
+    IEnumerator FadeIn()
+    {
+
+        while(cg.alpha > 0)
+        {
+            cg.alpha -= Time.deltaTime / fadeFactor;
+            yield return null;
+        }
     }
 
     
