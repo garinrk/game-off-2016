@@ -1,0 +1,121 @@
+Initialize engine version: 5.4.3f1 (01f4c123905a)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1b81)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.037 seconds
+Platform assembly: C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\u1070597\Documents\GitHub\game-off-2016\shootyshootyfunfun\Builds\FinalBuild_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.598181 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 26d4 -> priority: 1 
+  Thread -> id: 14cc -> priority: 1 
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.106624 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 647.
+Total: 0.254339 ms (FindLiveObjects: 0.035559 ms CreateObjectMapping: 0.012656 ms MarkObjects: 0.179605 ms  DeleteObjects: 0.026217 ms)
+
+meleetriggered Launcher
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Bullet
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "EnemyBullet(Clone)"
+ 
+(Filename:  Line: 0)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "EnemyBullet(Clone)"
+ 
+(Filename:  Line: 0)
+
+meleetriggered Bullet
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Enemy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Bullet
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Enemy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Bullet
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "EnemyBullet(Clone)"
+ 
+(Filename:  Line: 0)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "EnemyBullet(Clone)"
+ 
+(Filename:  Line: 0)
+
+meleetriggered Enemy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Enemy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Bullet
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Bullet
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Enemy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+meleetriggered Enemy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+BoxColliders does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "EnemyBullet(Clone)"
+ 
+(Filename:  Line: 0)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.803583 ms
+
+Unloading 62 unused Assets to reduce memory usage. Loaded Objects now: 311.
+Total: 1.544422 ms (FindLiveObjects: 0.011149 ms CreateObjectMapping: 0.012656 ms MarkObjects: 0.150675 ms  DeleteObjects: 1.369337 ms)
+
